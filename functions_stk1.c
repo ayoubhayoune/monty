@@ -1,80 +1,76 @@
 #include "monty.h"
 
+
 /**
- * addToStack - Adds a node to the stack.
- * @newNode: Pointer to the new node.
- * @lineNumber: Integer representing the line number of the opcode.
+ * add_to_stack - Adds a node to the stack.
+ * @new_node: Pointer to the new node.
+ * @ln: Interger representing the line number of of the opcode.
  */
-void addToStack(stack_t **newNode, __attribute__((unused))
-		unsigned int lineNumber)
+void add_to_stack(stack_t **new_node, __attribute__((unused))unsigned int ln)
 {
-	stack_t *temp;
+	stack_t *tmp;
 
-	if (newNode == NULL || *newNode == NULL)
+	if (new_node == NULL || *new_node == NULL)
 		exit(EXIT_FAILURE);
-
 	if (head == NULL)
 	{
-		head = *newNode;
+		head = *new_node;
 		return;
 	}
-
-	temp = head;
-	head = *newNode;
-	head->next = temp;
-	temp->prev = head;
+	tmp = head;
+	head = *new_node;
+	head->next = tmp;
+	tmp->prev = head;
 }
 
-/**
- * printStackElements - Prints the elements of the stack.
- * @stack: Pointer to a pointer pointing to the top node of the stack.
- * @lineNumber: Line number of the opcode.
- */
-void printStackElements(stack_t **stack, unsigned int lineNumber)
-{
-	stack_t *temp;
 
-	(void) lineNumber;
+/**
+ * print_stack - Adds a node to the stack.
+ * @stack: Pointer to a pointer pointing to top node of the stack.
+ * @line_number: line number of  the opcode.
+ */
+void print_stack(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tmp;
+
+	(void) line_number;
 	if (stack == NULL)
 		exit(EXIT_FAILURE);
-
-	temp = *stack;
-	for (; temp != NULL; temp = temp->next)
+	tmp = *stack;
+	while (tmp != NULL)
 	{
-		printf("%d\n", temp->n);
+		printf("%d\n", tmp->n);
+		tmp = tmp->next;
 	}
 }
 
 /**
- * removeTopNode - Removes the top node from the stack.
- * @stack: Pointer to a pointer pointing to the top node of the stack.
- * @lineNumber: Integer representing the line number of the opcode.
+ * pop_top - Adds a node to the stack.
+ * @stack: Pointer to a pointer pointing to top node of the stack.
+ * @line_number: Interger representing the line number of of the opcode.
  */
-void removeTopNode(stack_t **stack, unsigned int lineNumber)
+void pop_top(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp;
+	stack_t *tmp;
 
 	if (stack == NULL || *stack == NULL)
-		more_err(7, lineNumber);
+		more_err(7, line_number);
 
-	temp = *stack;
-	*stack = temp->next;
-
+	tmp = *stack;
+	*stack = tmp->next;
 	if (*stack != NULL)
 		(*stack)->prev = NULL;
-
-	free(temp);
+	free(tmp);
 }
 
 /**
- * printTopElement - Prints the value of the top node of the stack.
- * @stack: Pointer to a pointer pointing to the top node of the stack.
- * @lineNumber: Integer representing the line number of the opcode.
+ * print_top - Prints the top node of the stack.
+ * @stack: Pointer to a pointer pointing to top node of the stack.
+ * @line_number: Interger representing the line number of of the opcode.
  */
-void printTopElement(stack_t **stack, unsigned int lineNumber)
+void print_top(stack_t **stack, unsigned int line_number)
 {
 	if (stack == NULL || *stack == NULL)
-		more_err(6, lineNumber);
-
+		more_err(6, line_number);
 	printf("%d\n", (*stack)->n);
 }
